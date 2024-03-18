@@ -1,6 +1,7 @@
 package com.seleniumframework.core;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class DriverManager {
     private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
@@ -14,14 +15,14 @@ public class DriverManager {
     }
 
     public static void closeWebDriver(){
-        WebDriver driver = getDriver();
+        RemoteWebDriver driver = (RemoteWebDriver) getDriver();
         if (driver!=null){
             try {
                driver.close();
             } catch (Throwable e){
                 e.printStackTrace();
             }
-            if (driver!=null){
+            if (driver.getSessionId() != null){
                 try{
                     driver.quit();
                 }catch (Throwable e){
@@ -36,6 +37,7 @@ public class DriverManager {
         }
         threadLocal.remove();
     }
+    public static
 
 
 
