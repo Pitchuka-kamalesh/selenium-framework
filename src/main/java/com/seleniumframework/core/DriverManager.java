@@ -14,15 +14,16 @@ public class DriverManager {
     }
 
     public static void closeWebDriver(){
-        if (getDriver()!=null){
+        WebDriver driver = getDriver();
+        if (driver!=null){
             try {
-                getDriver().close();
+               driver.close();
             } catch (Throwable e){
                 e.printStackTrace();
             }
-            if (getDriver()!=null){
+            if (driver!=null){
                 try{
-                    getDriver().quit();
+                    driver.quit();
                 }catch (Throwable e){
                     e.printStackTrace();
                 }
