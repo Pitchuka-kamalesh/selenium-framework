@@ -47,9 +47,16 @@ public class TestListener implements ITestListener {
     public void onStart(ITestContext context) {
         extentReport = ExtentReportManager.createInstance(ExtentReportManager.getReportNameWithTimeStamp(), "TestApiAutomaction", "Api Testing");
         String browserName = context.getCurrentXmlTest().getParameter("browserName");
-        ExtentReportManager.logInfoDetails(browserName);
-        WebDriver driver = DriverFactory.getDriver(browserName);
-        DriverManager.setDriver(driver);
+        if(browserName==null){
+            ExtentReportManager.logInfoDetails("Browsername is not present");
+
+        }
+        else {
+            ExtentReportManager.logInfoDetails("BrowserName  "+browserName);
+            WebDriver driver = DriverFactory.getDriver(browserName);
+            DriverManager.setDriver(driver);
+        }
+
 
     }
 
