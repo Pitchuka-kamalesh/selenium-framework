@@ -3,7 +3,7 @@ package com.seleniumframework.core;
 import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
-    private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<WebDriver>();
+    private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
 
     public static WebDriver getDriver(){
         return threadLocal.get();
@@ -20,15 +20,22 @@ public class DriverManager {
             } catch (Throwable e){
                 e.printStackTrace();
             }
-            try{
-                getDriver().quit();
-            }catch (Throwable e){
-                e.printStackTrace();
+            if (getDriver()!=null){
+                try{
+                    getDriver().quit();
+                }catch (Throwable e){
+                    e.printStackTrace();
+                }
             }
-
+        }
+        try {
+            Thread.sleep(2*1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
         threadLocal.remove();
     }
+
 
 
 }
