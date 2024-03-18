@@ -1,0 +1,9 @@
+testng - 6.9.10
+selenium-java - 4.5
+loh4j - 2.5
+json-simple =- 1.1
+javax-mail -1.5.5
+sun-mail -1.5.1
+jfreecharts
+commons-io
+common-lang3
