@@ -41,8 +41,5 @@ public class DriverManager {
         }
         threadLocal.remove();
     }
-    public static
-
-
 
 }
