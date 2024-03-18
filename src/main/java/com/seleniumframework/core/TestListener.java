@@ -46,6 +46,9 @@ public class TestListener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         extentReport = ExtentReportManager.createInstance(ExtentReportManager.getReportNameWithTimeStamp(), "TestApiAutomaction", "Api Testing");
+        String browserName = context.getCurrentXmlTest().getParameter("browserName");
+        WebDriver driver = DriverFactory.getDriver(browserName);
+        DriverManager.setDriver(driver);
 
     }
 

@@ -11,7 +11,7 @@ public class DriverFactory {
     public DriverFactory(){
 
     }
-    public static WebDriver getDriver(String browserName) throws Throwable {
+    public static WebDriver getDriver(String browserName) {
 
         switch (browserName.toLowerCase()) {
             case "chrome":
