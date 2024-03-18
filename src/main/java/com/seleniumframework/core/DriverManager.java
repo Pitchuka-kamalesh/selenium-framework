@@ -3,6 +3,8 @@ package com.seleniumframework.core;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.util.Arrays;
+
 public class DriverManager {
     private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
 
@@ -19,14 +21,16 @@ public class DriverManager {
         if (driver!=null){
             try {
                driver.close();
+                ExtentReportManager.logInfoDetails("Closing the WebDriver");
             } catch (Throwable e){
-                e.printStackTrace();
+                ExtentReportManager.logFailDetails(Arrays.toString(e.getStackTrace()));
             }
             if (driver.getSessionId() != null){
                 try{
                     driver.quit();
+                    ExtentReportManager.logInfoDetails("Quiting the WebDriver");
                 }catch (Throwable e){
-                    e.printStackTrace();
+                    ExtentReportManager.logFailDetails(Arrays.toString(e.getStackTrace()));
                 }
             }
         }
