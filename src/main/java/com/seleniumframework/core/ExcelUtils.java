@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class ExcelUtils {
     static Workbook workbook;
+    static Sheet sheet;
 
     private ExcelUtils() {
         throw new IllegalStateException("Utility class");
@@ -60,32 +61,29 @@ public class ExcelUtils {
     }
 
     /**
-     * @param excelFile
      * @param sheetName
      * @param rowNum
      * @param cellNum
      * @param value
      */
-    public static void setCellData(String excelFile, String sheetName, int rowNum, int cellNum, String value) {
-        Sheet sheet = workbook.getSheet(sheetName);
+    public static void setCellData(String sheetName, int rowNum, int cellNum, String value) {
+        sheet = workbook.getSheet(sheetName);
         Row row = sheet.getRow(rowNum);
-        Cell cell = row.createCell(cellNum);
         if (value != null) {
-            cell.setCellValue(value);
+            sheet.getRow(rowNum).createCell(cellNum).setCellValue(value);
             row.getCell(cellNum).setCellStyle(getStyle(value));
         }
-        try (FileOutputStream outputStream = new FileOutputStream(excelFile)) {
-            workbook.write(outputStream);
-        } catch (IOException e) {
-            ExtentReportManager.logStacktrace(Arrays.toString(e.getStackTrace()));
-        }
-
     }
 
     /**
      * Closing the workbook
      */
-    public static void closeWorkbook() {
+    public static void writeExcelFile(String excelFile) {
+        try (FileOutputStream outputStream = new FileOutputStream(excelFile)) {
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            ExtentReportManager.logStacktrace(Arrays.toString(e.getStackTrace()));
+        }
         try {
             workbook.close();
         } catch (IOException e) {
@@ -96,11 +94,11 @@ public class ExcelUtils {
     public static Object[][] getDataForDataProvider(String sheetName) {
         int rowNum = getRowCount(sheetName);
         int cellNum = getCellCount(sheetName);
-        Object[][] data = new Object[rowNum - 1][cellNum];
-        for (int i = 1; i < rowNum; i++) {
+        Object[][] data = new Object[rowNum][cellNum];
+        for (int i = 0; i < rowNum; i++) {
             for (int j = 0; j < cellNum; j++) {
-                String value = getCellData(sheetName, i, j);
-                data[i - 1][j] = value;
+                String value = getCellData(sheetName, i+1, j);
+                data[i][j] = value;
             }
         }
 
