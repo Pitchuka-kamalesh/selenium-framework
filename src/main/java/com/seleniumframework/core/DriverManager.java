@@ -20,11 +20,11 @@ public class DriverManager {
     }
 
     public static synchronized void closeWebDriver(){
-        WebDriver drivers =  getDriver();
+        WebDriver drivers = getDriver();
         if (drivers!=null){
                 try{
-                    drivers.quit();
                     ExtentReportManager.logInfoDetails("Quiting the WebDriver");
+                    drivers.quit();
                 }catch (NoSuchSessionException e){
                     ExtentReportManager.logStacktrace(Arrays.toString(e.getStackTrace()));
                 }
