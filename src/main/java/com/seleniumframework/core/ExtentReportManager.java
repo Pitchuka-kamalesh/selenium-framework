@@ -9,11 +9,18 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+
 
 public class ExtentReportManager {
     public static ExtentReports extentReports;
 
+
+    /**
+     * @param fileName
+     * @param reportName
+     * @param documentTitle
+     * @return ExtentReports
+     */
     public static ExtentReports createInstance(String fileName, String reportName, String documentTitle) {
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(fileName);
         extentSparkReporter.config().setTheme(Theme.DARK);
@@ -25,6 +32,9 @@ public class ExtentReportManager {
         return extentReports;
     }
 
+    /**
+     * @return String
+     */
     public static String getReportNameWithTimeStamp() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -32,14 +42,23 @@ public class ExtentReportManager {
         return "reports/extent/" +datetime + ".html";
     }
 
+    /**
+     * @param log
+     */
     public static void logPassDetails(String log) {
         TestListener.extentTest.get().pass(MarkupHelper.createLabel(log, ExtentColor.GREEN));
     }
 
+    /**
+     * @param log
+     */
     public static void logFailDetails(String log) {
         TestListener.extentTest.get().fail(MarkupHelper.createLabel(log, ExtentColor.RED));
     }
 
+    /**
+     * @param log
+     */
     public static void logStacktrace(String log) {
         String trace = log.replaceAll(",", "<br>");
         String finalStracktrace = "<details>/n" +
@@ -48,23 +67,39 @@ public class ExtentReportManager {
         TestListener.extentTest.get().fail(finalStracktrace);
     }
 
+    /**
+     * @param log
+     */
     public static void logSkippedDetails(String log) {
         TestListener.extentTest.get().skip(MarkupHelper.createLabel(log, ExtentColor.YELLOW));
     }
 
+    /**
+     * @param log
+     */
     public static void logWarningDetails(String log) {
         TestListener.extentTest.get().warning(MarkupHelper.createLabel(log, ExtentColor.BLUE));
     }
 
+    /**
+     * @param log
+     */
     public static void logInfoDetails(String log) {
         TestListener.extentTest.get().info(MarkupHelper.createLabel(log, ExtentColor.ORANGE));
     }
+
+    /**
+     * @param json
+     */
     public static void logJson(String json){
         TestListener.extentTest.get().info(MarkupHelper.createCodeBlock(json, CodeLanguage.JSON));
     }
 
-    public static void logXMLBody(String json){
-        TestListener.extentTest.get().info(MarkupHelper.createCodeBlock(json,CodeLanguage.XML));
+    /**
+     * @param xml
+     */
+    public static void logXMLBody(String xml){
+        TestListener.extentTest.get().info(MarkupHelper.createCodeBlock(xml,CodeLanguage.XML));
     }
 
  /*

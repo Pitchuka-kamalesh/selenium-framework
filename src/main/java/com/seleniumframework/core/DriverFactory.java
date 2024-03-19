@@ -8,10 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class DriverFactory {
 
 
-    public DriverFactory(){
-
-    }
-    public static WebDriver getDriver(String browserName) {
+    public static WebDriver getBrowserDriver(String browserName) {
 
         switch (browserName.toLowerCase()) {
             case "chrome":

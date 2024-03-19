@@ -2,7 +2,6 @@ package com.seleniumframework.core;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -10,8 +9,8 @@ import org.testng.ITestResult;
 import java.util.Arrays;
 
 public class TestListener implements ITestListener {
-    public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
-    private static ExtentReports extentReport;
+    public static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+    private ExtentReports extentReport;
 
     @Override
     public void onTestStart(ITestResult result) {
@@ -20,10 +19,6 @@ public class TestListener implements ITestListener {
 
     }
 
-    @Override
-    public void onTestSuccess(ITestResult result) {
-
-    }
 
     @Override
     public void onTestFailure(ITestResult result) {
@@ -33,36 +28,14 @@ public class TestListener implements ITestListener {
     }
 
     @Override
-    public void onTestSkipped(ITestResult result) {
-
-
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-
-    }
-
-    @Override
     public void onStart(ITestContext context) {
         extentReport = ExtentReportManager.createInstance(ExtentReportManager.getReportNameWithTimeStamp(), "TestApiAutomaction", "Api Testing");
-        String browserName = context.getCurrentXmlTest().getParameter("browserName");
-        if(browserName==null){
-            System.out.println("No browser name");
-
-        }
-        else {
-            WebDriver driver = DriverFactory.getDriver(browserName);
-            DriverManager.setDriver(driver);
-            System.out.println("BrowserName "+browserName);
-        }
 
 
     }
 
     @Override
     public void onFinish(ITestContext context) {
-        DriverManager.closeWebDriver();
         if (extentReport != null) {
             extentReport.flush();
         }
