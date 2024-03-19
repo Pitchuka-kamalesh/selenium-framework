@@ -2,7 +2,6 @@ package com.seleniumframework.core;
 
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.Arrays;
 
@@ -16,9 +15,12 @@ public class DriverManager {
     public static void setDriver(WebDriver driver){
         threadLocal.set(driver);
     }
+    public static void releaseWebDriver(){
+        threadLocal.remove();
+    }
 
     public static synchronized void closeWebDriver(){
-        RemoteWebDriver drivers = (RemoteWebDriver) getDriver();
+        WebDriver drivers =  getDriver();
         if (drivers!=null){
                 try{
                     drivers.quit();
@@ -27,7 +29,6 @@ public class DriverManager {
                     ExtentReportManager.logStacktrace(Arrays.toString(e.getStackTrace()));
                 }
             }
-        threadLocal.remove();
         }
 
     }
