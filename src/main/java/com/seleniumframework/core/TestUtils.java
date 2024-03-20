@@ -7,8 +7,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 
-import static com.seleniumframework.core.DriverManager.getDriver;
-
 public class TestUtils {
     private static final Logger log = LogManager.getLogger(TestUtils.class.getName());
     /*
