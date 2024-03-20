@@ -4,8 +4,8 @@
 
     <groupId>com.seleniumFramework</groupId>
     <artifactId>SeleniumAutomactionFrameWork</artifactId>
-    <version>1.0</version>
-    <packaging>pom</packaging>
+    <version>2.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
 
     <properties>
@@ -18,6 +18,9 @@
             <id>github</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/Pitchuka-kamalesh/SeleniumAutomactionFrameWork</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </distributionManagement>
 
@@ -36,7 +39,7 @@
             <artifactId>testng</artifactId>
             <version>7.4.0</version>
         </dependency>
-        <!-- logging depencies -->
+        <!-- logging dependency's -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
