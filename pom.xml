@@ -4,7 +4,7 @@
 
     <groupId>com.seleniumframework.core</groupId>
     <artifactId>seleniumautomactionframework</artifactId>
-    <version>2.2-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>SeleniumAutomactionFrameWork</name>
 
