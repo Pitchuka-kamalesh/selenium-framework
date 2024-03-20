@@ -16,7 +16,7 @@ public class TestUtils {
     * */
 
     public static String takeScreenshotAsBase64(WebDriver driver){
-        log.info("TestUtils.takeScreenshotAsBase64");
+        log.info("TestUtils.takeScreenshotAsBase64()");
         try {
             Thread.sleep(2*1000);
         } catch (InterruptedException e) {
