@@ -19,7 +19,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://github.com/Pitchuka-kamalesh/SeleniumAutomactionFrameWork</url>
+            <url>https://maven.pkg.github.com/Pitchuka-kamalesh/SeleniumAutomactionFrameWork</url>
         </repository>
     </distributionManagement>
 
