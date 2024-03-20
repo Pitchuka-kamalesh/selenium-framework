@@ -46,7 +46,7 @@ public class ExcelUtils {
      * @param sheetName
      * @param rowNum
      * @param cellNum
-     * @return "String cellValue"
+     * @return String
      */
     public static String getCellData(String sheetName, int rowNum, int cellNum) {
         String cellValue = null;

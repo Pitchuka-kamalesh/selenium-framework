@@ -2,6 +2,7 @@ package com.seleniumframework.core;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.ThreadGuard;
@@ -26,6 +27,8 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+        log.info("Capture the screenshot in the Report");
+        ExtentReportManager.logAttachScreenshot(TestUtils.takeScreenshotAsBase64(DriverManager.getDriver()));
         log.error(result.getThrowable().getMessage());
         ExtentReportManager.logFailDetails(result.getThrowable().getMessage());
         log.error(result.getThrowable().getStackTrace());

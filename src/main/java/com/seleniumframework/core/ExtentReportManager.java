@@ -1,6 +1,7 @@
 package com.seleniumframework.core;
 
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -86,6 +87,9 @@ public class ExtentReportManager {
      */
     public static void logInfoDetails(String log) {
         TestListener.extentTest.get().info(MarkupHelper.createLabel(log, ExtentColor.ORANGE));
+    }
+    public static void logAttachScreenshot(String screenShot){
+        TestListener.extentTest.get().info(MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot).build());
     }
 
     /**
