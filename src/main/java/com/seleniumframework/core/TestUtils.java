@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class TestUtils {
     private static final Logger log = LogManager.getLogger(TestUtils.class.getName());
     /*
-    * we have implemented the code for the test utills
+    * we have implemented the code for the test
     *
     *
     * */

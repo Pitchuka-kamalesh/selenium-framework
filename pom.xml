@@ -6,7 +6,6 @@
     <artifactId>selenium-framework</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>SeleniumAutomactionFrameWork</name>
 
 
     <properties>
@@ -24,7 +23,6 @@
             </snapshots>
         </repository>
     </distributionManagement>
-
 
     <dependencies>
 
