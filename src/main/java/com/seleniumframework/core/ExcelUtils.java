@@ -1,21 +1,31 @@
 package com.seleniumframework.core;
 
 import org.apache.poi.ss.usermodel.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Properties;
 
+/**
+ * Utility class for working with Excel files.
+ * @author Kamalesh
+ * @version 1.0
+ */
 public class ExcelUtils {
     static Workbook workbook;
     static Sheet sheet;
 
+    /**
+     * Constructor to initialize the ExcelUtils and load the workbook.
+     * It loads the workbook specified in the properties file.
+     *
+     * @throws RuntimeException if an IOException occurs while loading the workbook.
+     */
+
     public ExcelUtils() {
         try {
-            loadWorkbook(PropertiesUtils.properties.getProperty("dataSheet"));
+            loadWorkbook(PropertiesUtils.getProperties().getProperty("dataSheet"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -23,21 +33,25 @@ public class ExcelUtils {
 
 
     /**
-     * @param excelFilePath We are loading the Workbook by using the excelFilePath.
-     * @throws IOException When the excelFilePath is not found and there is any action doing to that file we are getting io exception
+     * Loads the Excel workbook from the specified file path.
+     *
+     * @param excelFilePath The file path of the Excel workbook to load.
+     * @throws IOException If the specified file path is not found or any IOException occurs.
      */
     public static void loadWorkbook(String excelFilePath) throws IOException {
-        try(FileInputStream fi = new FileInputStream(new File(excelFilePath))) {
+        try (FileInputStream fi = new FileInputStream(new File(excelFilePath))) {
             workbook = WorkbookFactory.create(fi);
-        }catch (IOException io){
+        } catch (IOException io) {
             io.getStackTrace();
         }
 
     }
 
     /**
-     * @param sheetName
-     * @return number of rows
+     * Gets the number of rows in the specified sheet.
+     *
+     * @param sheetName The name of the sheet.
+     * @return The number of rows in the sheet.
      */
     public static int getRowCount(String sheetName) {
         Sheet sheet = workbook.getSheet(sheetName);
@@ -45,8 +59,10 @@ public class ExcelUtils {
     }
 
     /**
-     * @param sheetName In this method we getting the Cell values
-     * @return integer number of cells
+     * Gets the number of cells in the first row of the specified sheet.
+     *
+     * @param sheetName The name of the sheet.
+     * @return The number of cells in the first row of the sheet.
      */
     public static int getCellCount(String sheetName) {
         Sheet sheet = workbook.getSheet(sheetName);
@@ -54,10 +70,12 @@ public class ExcelUtils {
     }
 
     /**
-     * @param sheetName
-     * @param rowNum
-     * @param cellNum
-     * @return String
+     * Gets the value of the cell at the specified row and column in the specified sheet.
+     *
+     * @param sheetName The name of the sheet.
+     * @param rowNum    The row number.
+     * @param cellNum   The column number.
+     * @return The value of the cell as a string.
      */
     public static String getCellData(String sheetName, int rowNum, int cellNum) {
         String cellValue = null;
@@ -72,10 +90,12 @@ public class ExcelUtils {
     }
 
     /**
-     * @param sheetName
-     * @param rowNum
-     * @param cellNum
-     * @param value
+     * Sets the value of the cell at the specified row and column in the specified sheet.
+     *
+     * @param sheetName The name of the sheet.
+     * @param rowNum    The row number.
+     * @param cellNum   The column number.
+     * @param value     The value to set.
      */
     public static void setCellData(String sheetName, int rowNum, int cellNum, String value) {
         sheet = workbook.getSheet(sheetName);
@@ -86,8 +106,11 @@ public class ExcelUtils {
         }
     }
 
+
     /**
-     * Closing the workbook
+     * Writes the workbook to the specified Excel file.
+     *
+     * @param excelFile The file path of the Excel file to write.
      */
     public static void writeExcelFile(String excelFile) {
         try (FileOutputStream outputStream = new FileOutputStream(excelFile)) {
@@ -102,13 +125,19 @@ public class ExcelUtils {
         }
     }
 
+    /**
+     * Gets the cell data from the specified sheet and returns it as a 2D array.
+     *
+     * @param sheetName The name of the sheet.
+     * @return A 2D array containing the cell data.
+     */
     public static Object[][] getCellData(String sheetName) {
         int rowNum = getRowCount(sheetName);
         int cellNum = getCellCount(sheetName);
         Object[][] data = new Object[rowNum][cellNum];
         for (int i = 0; i < rowNum; i++) {
             for (int j = 0; j < cellNum; j++) {
-                String value = getCellData(sheetName, i+1, j);
+                String value = getCellData(sheetName, i + 1, j);
                 data[i][j] = value;
             }
         }
@@ -117,6 +146,12 @@ public class ExcelUtils {
     }
 
 
+    /**
+     * Gets the cell style based on the status string.
+     *
+     * @param status The status string (e.g., "pass", "fail", "blocked", "skip").
+     * @return The cell style.
+     */
     private static CellStyle getStyle(String status) {
         CellStyle style = workbook.createCellStyle();
         Font font = workbook.createFont();
