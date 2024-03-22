@@ -38,18 +38,17 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        String browser = context.getCurrentXmlTest().getParameter("browserName");
-        log.info(browser);
         extentReport = ExtentReportManager.createInstance(ExtentReportManager.getReportNameWithTimeStamp(), "TestApiAutomaction", "Api Testing");
-        log.info("Starting the Browser and loading the data  it is running which method");
-        DriverManager.setDriver(ThreadGuard.protect(DriverFactory.getBrowserDriver(browser)));
+        TestUtils.launchApp();
     }
 
     @Override
     public void onFinish(ITestContext context) {
+        log.info("TestListener.onFinish()");
         DriverManager.closeWebDriver();
-        DriverManager.releaseWebDriver();
+        DriverManager.releaseDriver();
         if (extentReport != null) {
+            log.info("TestListener.onFinish() -> closing the reports");
             extentReport.flush();
         }
 

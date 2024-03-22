@@ -10,10 +10,14 @@ public class BaseTest {
     @BeforeSuite
     public synchronized void beforeSuite(){
         log.info("BaseTest.beforeSuit()");
+        TestUtils.startBrowser();
+        PropertiesUtils propertiesUtils = new PropertiesUtils();
+        TestUtils.startBrowser();
     }
     @BeforeTest
     public synchronized void beforeTest(){
         log.info("BaseTest.beforeTest()");
+        TestUtils.launchApp();
     }
     @BeforeClass
     public synchronized void beforeClass(){

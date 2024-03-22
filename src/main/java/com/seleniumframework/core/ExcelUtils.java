@@ -3,16 +3,22 @@ package com.seleniumframework.core;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Properties;
 
 public class ExcelUtils {
     static Workbook workbook;
     static Sheet sheet;
 
-    private ExcelUtils() {
-        throw new IllegalStateException("Utility class");
+    public ExcelUtils() {
+        try {
+            loadWorkbook(PropertiesUtils.properties.getProperty("dataSheet"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -21,7 +27,12 @@ public class ExcelUtils {
      * @throws IOException When the excelFilePath is not found and there is any action doing to that file we are getting io exception
      */
     public static void loadWorkbook(String excelFilePath) throws IOException {
-        workbook = WorkbookFactory.create(new File(excelFilePath));
+        try(FileInputStream fi = new FileInputStream(new File(excelFilePath))) {
+            workbook = WorkbookFactory.create(fi);
+        }catch (IOException io){
+            io.getStackTrace();
+        }
+
     }
 
     /**
@@ -91,7 +102,7 @@ public class ExcelUtils {
         }
     }
 
-    public static Object[][] getDataForDataProvider(String sheetName) {
+    public static Object[][] getCellData(String sheetName) {
         int rowNum = getRowCount(sheetName);
         int cellNum = getCellCount(sheetName);
         Object[][] data = new Object[rowNum][cellNum];
