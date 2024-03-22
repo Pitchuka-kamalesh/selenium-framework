@@ -1,6 +1,4 @@
-Sure, here's the revised README.md with the corrections:
 
-```markdown
 # Selenium Automation Framework
 
 This repository contains a Selenium-based automation framework designed to facilitate automated testing of web applications. The framework is built using Java, TestNG, and Selenium WebDriver.
@@ -56,6 +54,7 @@ Ensure you have the following software installed on your machine:
      <version>1.1-snapshot</version>
    </dependency>
    ```
+7.For project java documentation, refer to the [JavaDoc](https://pitchuka-kamalesh.github.io/SeleniumAutomactionFrameWork/com/seleniumframework/core/package-summary.html).   
 
 ## Project Structure
 
