@@ -67,13 +67,8 @@ SeleniumAutomactionFrameWork/
 │   │           └── seleniumframework/
 │   │               └── core/
 │   │                   └── (core framework classes)
-│   ├── test/
-│   │   └── java/
-│   │       └── com/
-│   │           └── seleniumframework/
-│   │               └── tests/
-│   │                   └── (test classes)
-│   └── resources/
+│   |
+|   └── resources/
 │       ├── log4j2.xml
 │       └── (other resources)
 ├── pom.xml
