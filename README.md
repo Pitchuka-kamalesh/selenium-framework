@@ -1,4 +1,2 @@
-- Changes in snapshot 0.1
-- In ExcelUtils Fil
-  - changed the methodName From `getDataForDataProvider`  -> `getCellData`
-  - Changing the 
+- Changes in snapshot 1.1
+- Added the lanchBrowser() & lanchApp() in the TestUtils class.
