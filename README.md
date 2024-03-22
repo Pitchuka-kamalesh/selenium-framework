@@ -38,7 +38,7 @@ Ensure you have the following software installed on your machine:
 
 3. Configure the test parameters in the `config.properties` file located in the `config/` directory.
 
-4. Place the `log4j2.xml` file in the `resources/` directory.
+4. Place the `log4j2.xml` file in the `test/resources/` directory.
 
 5. Run the tests using Maven:
 
