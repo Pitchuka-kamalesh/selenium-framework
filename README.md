@@ -1,2 +1,1 @@
-- Changes in snapshot 1.1
-- Added the lanchBrowser() & lanchApp() in the TestUtils class.
+[JavaDOC for this project](https://pitchuka-kamalesh.github.io/SeleniumAutomactionFrameWork/com/seleniumframework/core/package-summary.html)
