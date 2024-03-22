@@ -1,5 +1,6 @@
----
+Sure, here's the revised README.md with the corrections:
 
+```markdown
 # Selenium Automation Framework
 
 This repository contains a Selenium-based automation framework designed to facilitate automated testing of web applications. The framework is built using Java, TestNG, and Selenium WebDriver.
@@ -38,19 +39,23 @@ Ensure you have the following software installed on your machine:
 
 3. Configure the test parameters in the `config.properties` file located in the `config/` directory.
 
-4. Place the `log4j2.xml` file in the `test/resources/` directory.
+4. Place the `log4j2.xml` file in the `main/resources/` directory.
 
-5. Run the tests using Maven:
+5. Build and install the framework using Maven:
 
    ```bash
-   mvn clean test
+   mvn clean install
    ```
 
-6. After test execution, view the test reports located in the `test-output` directory.
+6. After successful installation, you can add the framework as a dependency to another project by including the following dependency in the `pom.xml` file:
 
-## Javadoc
-
-Access the Javadoc for the core framework classes [here](https://pitchuka-kamalesh.github.io/SeleniumAutomactionFrameWork/com/seleniumframework/core/package-summary.html).
+   ```xml
+   <dependency>
+     <groupId>com.seleniumframework.core</groupId>
+     <artifactId>selenium-framework</artifactId>
+     <version>1.1-snapshot</version>
+   </dependency>
+   ```
 
 ## Project Structure
 
@@ -67,22 +72,10 @@ SeleniumAutomactionFrameWork/
 │   │           └── seleniumframework/
 │   │               └── core/
 │   │                   └── (core framework classes)
-│   |
-|   └── resources/
+│   └── resources/
 │       ├── log4j2.xml
 │       └── (other resources)
 ├── pom.xml
 └── README.md
 ```
-
-## Contributing
-
-Contributions are welcome! Feel free to submit bug reports, feature requests, or pull requests to improve the framework.
-
-## License
-
-
-
 ---
-
-Feel free to customize the content according to your specific project details and requirements.
