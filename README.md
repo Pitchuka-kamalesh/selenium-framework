@@ -1,1 +1,2 @@
-hello
+- Changes in snapshot 1.1
+- Added the lanchBrowser() & lanchApp() in the TestUtils class.

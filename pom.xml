@@ -4,7 +4,7 @@
 
     <groupId>com.seleniumframework.core</groupId>
     <artifactId>selenium-framework</artifactId>
-    <version>1.0</version>
+    <version>1.0-snapshot</version>
     <packaging>jar</packaging>
 
 

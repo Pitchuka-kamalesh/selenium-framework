@@ -10,17 +10,24 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Manages ExtentReports for test reporting.
+ *
+ * @see com.seleniumframework.core.TestListener
+ * @author Kamalesh
+ * @version 1.0
+ */
 
 public class ExtentReportManager {
     public static ExtentReports extentReports;
 
 
     /**
-     * @param fileName
-     * @param reportName
-     * @param documentTitle
-     * @return ExtentReports
+     * Creates an instance of ExtentReports.
+     * @param fileName The file name for the report.
+     * @param reportName The name of the report.
+     * @param documentTitle The title of the document.
+     * @return An instance of ExtentReports.
      */
     public static ExtentReports createInstance(String fileName, String reportName, String documentTitle) {
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(fileName);
@@ -34,7 +41,8 @@ public class ExtentReportManager {
     }
 
     /**
-     * @return String
+     * Generates a report name with a timestamp.
+     * @return A report name with a timestamp.
      */
     public static String getReportNameWithTimeStamp() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
@@ -44,21 +52,27 @@ public class ExtentReportManager {
     }
 
     /**
-     * @param log
+     * Logs a pass message in the Extent Report.
+     *
+     * @param log The log message to be displayed.
      */
     public static void logPassDetails(String log) {
         TestListener.extentTest.get().pass(MarkupHelper.createLabel(log, ExtentColor.GREEN));
     }
 
     /**
-     * @param log
+     * Logs a fail message in the Extent Report.
+     *
+     * @param log The log message to be displayed.
      */
     public static void logFailDetails(String log) {
         TestListener.extentTest.get().fail(MarkupHelper.createLabel(log, ExtentColor.RED));
     }
 
     /**
-     * @param log
+     * Logs a stack trace in the Extent Report.
+     *
+     * @param log The log message containing the stack trace.
      */
     public static void logStacktrace(String log) {
         String trace = log.replaceAll(",", "<br>");
@@ -69,38 +83,52 @@ public class ExtentReportManager {
     }
 
     /**
-     * @param log
+     * Logs a skipped message in the Extent Report.
+     *
+     * @param log The log message to be displayed.
      */
     public static void logSkippedDetails(String log) {
         TestListener.extentTest.get().skip(MarkupHelper.createLabel(log, ExtentColor.YELLOW));
     }
 
     /**
-     * @param log
+     * Logs a warning message in the Extent Report.
+     *
+     * @param log The log message to be displayed.
      */
     public static void logWarningDetails(String log) {
         TestListener.extentTest.get().warning(MarkupHelper.createLabel(log, ExtentColor.BLUE));
     }
 
     /**
-     * @param log
+     * Logs an information message in the Extent Report.
+     *
+     * @param log The log message to be displayed.
      */
     public static void logInfoDetails(String log) {
         TestListener.extentTest.get().info(MarkupHelper.createLabel(log, ExtentColor.ORANGE));
     }
+    /**
+     * Logs a screenshot in the Extent Report.
+     *
+     * @param screenShot The base64 encoded string of the screenshot.
+     */
     public static void logAttachScreenshot(String screenShot){
         TestListener.extentTest.get().info(MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot).build());
     }
 
     /**
-     * @param json
+     * Logs a JSON content in the Extent Report.
+     *
+     * @param json The JSON content to be displayed.
      */
     public static void logJson(String json){
         TestListener.extentTest.get().info(MarkupHelper.createCodeBlock(json, CodeLanguage.JSON));
     }
-
     /**
-     * @param xml
+     * Logs an XML content in the Extent Report.
+     *
+     * @param xml The XML content to be displayed.
      */
     public static void logXMLBody(String xml){
         TestListener.extentTest.get().info(MarkupHelper.createCodeBlock(xml,CodeLanguage.XML));
