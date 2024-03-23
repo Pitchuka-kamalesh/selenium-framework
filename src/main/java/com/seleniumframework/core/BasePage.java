@@ -27,8 +27,8 @@ public class BasePage {
      *
      * @param element The WebElement to wait for.
      */
-    public void waitForElement(WebElement element) {
-        log.info("BasePage.waitForElement() -> {} ", Timeouts.SHORT_TIMEOUT.toString());
+    public static void waitForElement(WebElement element) {
+        log.info("BasePage.waitForElement() -> {} ", "wait for 5 seconds");
         WebDriverWait wait = new WebDriverWait(getDriver(), Timeouts.SHORT_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -38,7 +38,7 @@ public class BasePage {
      * @param element The WebElement representing the text box.
      * @param value   The value to send to the text box.
      */
-    public void sendKeys(WebElement element, String value) {
+    public static void sendKeys(WebElement element, String value) {
         waitForElement(element);
         log.info("BasePage.sendKeys() -> {} ", "Clearing the textBox");
         element.clear();
@@ -50,10 +50,34 @@ public class BasePage {
      *
      * @param element The WebElement to click on.
      */
-    public void safeClick(WebElement element) {
+    public static void safeClick(WebElement element) {
         waitForElement(element);
         log.info("BasePage.safeClick()");
         element.click();
+    }
+
+    /**
+     * Retrieves the text from a WebElement safely by waiting for the element to be present.
+     *
+     * @param element The WebElement from which to retrieve text.
+     * @return The text content of the WebElement.
+     */
+    public static String getSafeText(WebElement element){
+        waitForElement(element);
+        log.info("BasePage.getSafeText()");
+        return element.getText();
+
+    }
+
+    /**
+     * Checks if a WebElement is present and displayed.
+     *
+     * @param element The WebElement to check for presence and visibility.
+     * @return True if the WebElement is present and displayed, false otherwise.
+     */
+    public static boolean checkElementIsPresent(WebElement element){
+
+        return element.isDisplayed();
     }
 
 }
