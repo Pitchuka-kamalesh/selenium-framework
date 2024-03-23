@@ -86,4 +86,10 @@ public class BasePage {
         alert.accept();
     }
 
+    public static String getUrl(){
+
+        return getDriver().getCurrentUrl();
+
+    }
+
 }
