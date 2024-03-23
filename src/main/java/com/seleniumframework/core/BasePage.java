@@ -3,6 +3,7 @@ package com.seleniumframework.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -78,6 +79,11 @@ public class BasePage {
     public static boolean checkElementIsPresent(WebElement element){
 
         return element.isDisplayed();
+    }
+
+    public static void acceptAlert(){
+        Alert alert = getDriver().switchTo().alert();
+        alert.accept();
     }
 
 }
