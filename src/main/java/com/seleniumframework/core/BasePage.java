@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.swing.*;
-
 import static com.seleniumframework.core.DriverManager.getDriver;
 
 /**
@@ -86,7 +84,7 @@ public class BasePage {
      * @param element The WebElement to check for presence and visibility.
      * @return True if the WebElement is present and displayed, false otherwise.
      */
-    protected static boolean checkElementIsDisplayed(WebElement element) {
+    protected static boolean isElementDisplayed(WebElement element) {
 
         return element.isDisplayed();
     }
@@ -116,5 +114,21 @@ public class BasePage {
 
         
     }
+    protected static String getAttribute(WebElement element, String attributeName){
+        return element.getAttribute(attributeName);
+    }
+
+    protected static boolean isImageDisplayed(WebElement element){
+
+        waitForElement(element);
+        String width = getAttribute(element,"naturalWidth");
+
+        return width != null && !width.equalsIgnoreCase("0");
+
+    }
+
+
+
+
 
 }

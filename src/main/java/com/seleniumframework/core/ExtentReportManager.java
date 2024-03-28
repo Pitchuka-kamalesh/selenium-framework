@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class ExtentReportManager {
-    public static ExtentReports extentReports;
+    public static ExtentReports extentReports = new ExtentReports();
 
 
     /**
@@ -36,7 +36,6 @@ public class ExtentReportManager {
         extentSparkReporter.config().setReportName(reportName);
         extentSparkReporter.config().setDocumentTitle(documentTitle);
         extentSparkReporter.config().setEncoding("utf-8");
-        extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
         return extentReports;
     }
@@ -111,7 +110,8 @@ public class ExtentReportManager {
      * @param screenShot The base64 encoded string of the screenshot.
      */
     public static void logAttachScreenshot(String screenShot){
-        TestListener.extentTest.get().info(MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot).build());
+        TestListener.extentTest.get().addScreenCaptureFromBase64String(screenShot,"FailureScreenshot").assignCategory("screenshots");
+        TestListener.extentTest.get().info("FailureScreenShot",MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot).build());
     }
 
     /**
