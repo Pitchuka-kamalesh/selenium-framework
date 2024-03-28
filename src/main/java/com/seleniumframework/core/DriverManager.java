@@ -52,7 +52,7 @@ public class DriverManager {
                     ExtentReportManager.logInfoDetails("Quiting the WebDriver");
                     drivers.quit();
                 }catch (NoSuchSessionException e){
-                    ExtentReportManager.logStacktrace(Arrays.toString(e.getStackTrace()));
+                    ExtentReportManager.logStacktrace(e);
                 }
             }
         }

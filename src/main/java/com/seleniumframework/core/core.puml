@@ -1,0 +1,84 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+ interface WebDriver {
+     + findElement()
+     + findElements()
+     + getTitle()
+     + getCurrentUrl()
+     + close()
+     + quit()
+     + navigateTo()
+     + switchTo()
+     + manage()
+ }
+
+ @startuml
+
+ class BasePage {
+     - Logger log
+     + BasePage()
+     + waitForElement(WebElement element)
+     + sendKeys(WebElement element, String value)
+     + safeClick(WebElement element)
+     + getSafeText(WebElement element): String
+     + checkElementIsDisplayed(WebElement element): boolean
+     + acceptAlert()
+     + getUrl(): String
+     + dropdownSelectByvalue(WebElement element, String value)
+     + selectDate(WebElement element)
+ }
+
+ class Logger {
+     + getLogger(String name): Logger
+     + info(String message)
+ }
+
+ class WebElement {
+     // WebElement attributes and methods
+ }
+
+ class WebDriverWait {
+     // WebDriverWait attributes and methods
+ }
+
+ class ExpectedConditions {
+     // ExpectedConditions attributes and methods
+ }
+
+ class Select {
+     // Select attributes and methods
+ }
+
+ class Timeouts {
+     - SHORT_TIMEOUT: int
+ }
+
+ class Alert {
+     // Alert attributes and methods
+ }
+
+ class DriverManager {
+     + getDriver(): WebDriver
+ }
+
+ class WebDriver {
+     // WebDriver attributes and methods
+ }
+
+ BasePage *-- Logger
+ BasePage *-- WebElement
+ BasePage *-- WebDriverWait
+ BasePage *-- ExpectedConditions
+ BasePage *-- Select
+ BasePage *-- Alert
+ BasePage *-- DriverManager
+ WebDriver *-- BasePage
+ WebDriver *-- DriverManager
+ WebDriver <-- WebElement
+
+
+
+
+@enduml

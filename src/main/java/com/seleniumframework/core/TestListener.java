@@ -42,8 +42,7 @@ public class TestListener implements ITestListener {
         ExtentReportManager.logAttachScreenshot(TestUtils.takeScreenshotAsBase64(DriverManager.getDriver()));
         log.error(result.getThrowable().getMessage());
         ExtentReportManager.logFailDetails(result.getThrowable().getMessage());
-        log.error(result.getThrowable().getStackTrace());
-        ExtentReportManager.logStacktrace(Arrays.toString(result.getThrowable().getStackTrace()));
+        ExtentReportManager.logStacktrace(result.getThrowable().fillInStackTrace());
 
     }
     /**
@@ -53,7 +52,7 @@ public class TestListener implements ITestListener {
      */
     @Override
     public void onStart(ITestContext context) {
-        extentReport = ExtentReportManager.createInstance(ExtentReportManager.getReportNameWithTimeStamp(), "TestApiAutomaction", "Api Testing");
+        extentReport = ExtentReportManager.createInstance(PropertiesUtils.getProperties().getProperty("report_path"), "Testing E2E", "Extent Report");
         TestUtils.launchApp();
     }
     /**

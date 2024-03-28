@@ -2,6 +2,7 @@ package com.seleniumframework.core;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -66,7 +67,7 @@ public class ExtentReportManager {
      * @param log The log message to be displayed.
      */
     public static void logFailDetails(String log) {
-        TestListener.extentTest.get().fail(MarkupHelper.createLabel(log, ExtentColor.RED));
+        TestListener.extentTest.get().fail(MarkupHelper.createLabel(log, ExtentColor.TRANSPARENT));
     }
 
     /**
@@ -74,12 +75,8 @@ public class ExtentReportManager {
      *
      * @param log The log message containing the stack trace.
      */
-    public static void logStacktrace(String log) {
-        String trace = log.replaceAll(",", "<br>");
-        String finalStracktrace = "<details>/n" +
-                "<summary>Click here to view the Exception stackTrace</summary>/n" +
-                trace + "</details>/n";
-        TestListener.extentTest.get().fail(finalStracktrace);
+    public static void logStacktrace(Throwable log) {
+        TestListener.extentTest.get().log(Status.FAIL,log);
     }
 
     /**

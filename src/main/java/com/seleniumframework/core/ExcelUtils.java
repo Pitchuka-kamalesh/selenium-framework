@@ -17,22 +17,6 @@ public class ExcelUtils {
     static Sheet sheet;
 
     /**
-     * Constructor to initialize the ExcelUtils and load the workbook.
-     * It loads the workbook specified in the properties file.
-     *
-     * @throws RuntimeException if an IOException occurs while loading the workbook.
-     */
-
-    public ExcelUtils() {
-        try {
-            loadWorkbook(PropertiesUtils.getProperties().getProperty("dataSheet"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    /**
      * Loads the Excel workbook from the specified file path.
      *
      * @param excelFilePath The file path of the Excel workbook to load.
@@ -88,6 +72,43 @@ public class ExcelUtils {
         }
         return cellValue;
     }
+    public static String getCellValue(int rowNum,int cellNum){
+
+        String cellValue = null;
+        Cell cell = sheet.getRow(rowNum).getCell(cellNum);
+        if (cell.getCellType() == CellType.NUMERIC) {
+            cellValue = cell.toString();
+        } else {
+            cellValue = cell.getStringCellValue();
+        }
+        return cellValue;
+
+    }
+    /**
+     * Gets the cell data from the specified sheet and returns it as a 2D array.
+     *
+     * @param sheetName The name of the sheet.
+     * @return A 2D array containing the cell data.
+     */
+    public static Object[][] getCellData(String excelFile,String sheetName) {
+        try {
+            loadWorkbook(excelFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        sheet = workbook.getSheet(sheetName);
+        int rowNum = sheet.getLastRowNum();
+        int cellNum = sheet.getRow(0).getLastCellNum();
+        Object[][] data = new Object[rowNum][cellNum];
+        for (int i = 0; i < rowNum; i++) {
+            for (int j = 0; j < cellNum; j++) {
+                String value = getCellValue((i + 1), j);
+                data[i][j] = value;
+            }
+        }
+
+        return data;
+    }
 
     /**
      * Sets the value of the cell at the specified row and column in the specified sheet.
@@ -116,34 +137,16 @@ public class ExcelUtils {
         try (FileOutputStream outputStream = new FileOutputStream(excelFile)) {
             workbook.write(outputStream);
         } catch (IOException e) {
-            ExtentReportManager.logStacktrace(Arrays.toString(e.getStackTrace()));
+            ExtentReportManager.logStacktrace(e);
         }
         try {
             workbook.close();
         } catch (IOException e) {
-            ExtentReportManager.logStacktrace(Arrays.toString(e.getStackTrace()));
+            ExtentReportManager.logStacktrace(e);
         }
     }
 
-    /**
-     * Gets the cell data from the specified sheet and returns it as a 2D array.
-     *
-     * @param sheetName The name of the sheet.
-     * @return A 2D array containing the cell data.
-     */
-    public static Object[][] getCellData(String sheetName) {
-        int rowNum = getRowCount(sheetName);
-        int cellNum = getCellCount(sheetName);
-        Object[][] data = new Object[rowNum][cellNum];
-        for (int i = 0; i < rowNum; i++) {
-            for (int j = 0; j < cellNum; j++) {
-                String value = getCellData(sheetName, i + 1, j);
-                data[i][j] = value;
-            }
-        }
 
-        return data;
-    }
 
 
     /**
