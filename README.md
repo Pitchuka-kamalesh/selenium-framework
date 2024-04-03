@@ -1,5 +1,5 @@
 
-# Selenium Automation Framework
+# Selenium Automation Hybrid Framework
 
 This repository contains a Selenium-based automation framework designed to facilitate automated testing of web applications. The framework is built using Java, TestNG, and Selenium WebDriver.
 
@@ -7,7 +7,7 @@ This repository contains a Selenium-based automation framework designed to facil
 
 - **Modular Design**: The framework is structured with a modular design, making it easy to maintain and scale.
 - **Page Object Model (POM)**: Implements the Page Object Model pattern for better code organization and readability.
-- **Logging**: Utilizes Log4j for logging test execution information, making it easier to debug and analyze test results.
+- **Logging**: Utilizes Log4j for logging test execution information, making debugging and analysing test results easier.
 - **Reporting**: Generates comprehensive test reports using ExtentReports, providing insights into test execution status and details.
 - **Configuration Management**: Utilizes properties files for configuration management, allowing easy modification of test parameters.
 - **Test Data Management**: Supports external test data sources such as Excel files for efficient management and reuse of test data.
